@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+
+    - name: Lint Check
+      run: |
+        pip install flake8
+        flake8 .
+
+    - name: Run Tests
+      run: echo "No tests added yet"
+
+    - name: Build Docker Image
+      run: docker build -t devops-app .
+
+    - name: Run Container (Deploy)
+      run: docker run -d -p 5000:5000 devops-app
