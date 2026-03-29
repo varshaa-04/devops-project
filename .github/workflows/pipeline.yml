@@ -46,17 +46,13 @@ jobs:
     - name: Build Docker Image
       run: docker build -t my-devops-app .
 
-    
     - name: Tag Image
       run: |
-        docker tag my-devops-app:latest 405464371687.dkr.ecr.us-east-1.amazonaws.com/devops-app:${{ github.sha }}
+          docker tag my-devops-app:latest 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }}
 
-  
-    - name: Push Image
-      run: |
-        docker push 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }}
-
-  
+     - name: Push Image
+       run: |
+         docker push 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }}
   
   
   
