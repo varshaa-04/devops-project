@@ -29,7 +29,6 @@ jobs:
     - name: Run Tests
       run: echo "No tests added yet"
 
-    # ✅ AWS CONFIG
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -55,7 +54,7 @@ jobs:
   
     - name: Push Image
       run: |
-        docker push 405464371687.dkr.ecr.us-east-1.amazonaws.com/devops-app:${{ github.sha }}
+        docker push 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }}
 
     # ❌ OPTIONAL (not useful in CI, but keeping if needed)
     - name: Run Container (Temporary Deploy)
