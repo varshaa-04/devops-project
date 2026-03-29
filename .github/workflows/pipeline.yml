@@ -56,5 +56,10 @@ jobs:
       run: |
         docker push 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }}
 
-   un Container (Temporary Deploy)
+  
+  
+  
+  
+  
+  un Container (Temporary Deploy)
       run: docker run -d -p 5000:5000 devops-app
