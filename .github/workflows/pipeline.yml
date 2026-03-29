@@ -51,3 +51,15 @@ jobs:
     - name: Push Image
       run: |
         docker push 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }}
+    - name: Deploy to EC2
+     run: |
+       echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+       chmod 400 key.pem
+
+       ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_IP }} "
+       aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 405464371687.dkr.ecr.us-east-1.amazonaws.com &&
+       docker pull 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }} &&
+       docker stop app || true &&
+       docker rm app || true &&
+       docker run -d -p 5000:5000 --name app 405464371687.dkr.ecr.us-east-1.amazonaws.com/my-devops-app:${{ github.sha }}
+    "
