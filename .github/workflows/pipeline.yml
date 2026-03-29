@@ -29,8 +29,8 @@ jobs:
     - name: Run Tests
       run: echo "No tests added yet"
 
-    - name: Build Docker Image
-      run: docker build -t devops-app .
+  #  - name: Build Docker Image
+   #   run: docker build -t devops-app .
 
     - name: Run Container (Deploy)
       run: docker run -d -p 5000:5000 devops-app
